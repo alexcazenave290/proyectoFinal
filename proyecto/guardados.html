@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Casa Patitas - Guardados</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .card-like.liked {
+            color: #e63946;
+            transform: scale(1.2);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .card-bookmark.saved {
+            color: #f4a261;
+            transform: scale(1.1);
+            transition: transform 0.2s ease;
+        }
+
+        /* ===== Encabezado ===== */
+        .header {
+            width: 90%;
+            max-width: 1200px;
+            margin: 24px auto 18px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #b48a5a;
+            border-radius: 15px;
+            padding: 20px;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(180, 138, 90, 0.3);
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fffbe6;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .header-subtitle {
+            color: #fffbe6;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* CODIGO PARA EL BOTON DE INICIAR SESIÓN  */
+        .Acceder-button {
+            position: absolute;
+            top: 20px;          
+            right: 20px;       
+            background-color: #b48a5a; 
+            color: #fffbe6;            
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;     
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+            z-index: 100;
+        }
+
+        .Acceder-button:hover {
+            transform: scale(1.05); 
+            background-color: #000000;
+        }
+    
+        /* ===== Cards ===== */
+        .cards-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem 2rem;
+            justify-items: center;
+            margin: 2.5rem 0;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: #b48a5a;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px #b48a5a55;
+            width: 320px;
+            margin: 20px auto;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 
+                transform 0.35s cubic-bezier(.4,1.5,.6,1),
+                box-shadow 0.35s cubic-bezier(.4,1.5,.6,1);
+        }
+
+        .card:hover {
+            transform: translateY(-16px) scale(1.035) rotate(-2deg);
+            box-shadow: 0 8px 32px #b48a5a88;
+            z-index: 2;
+        }
+
+        .card-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 14px 0 14px;
+            font-size: 1.2rem;
+            color: #5a4326;
+        }
+
+        .card-bookmark {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-bookmark:hover {
+            color: #f4a261;
+            transform: scale(1.1);
+        }
+
+        .card-bookmark.saved {
+            color: #f4a261;
+            transform: scale(1.1);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-comment {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-comment:hover {
+            color: #8b4513;
+            transform: scale(1.1);
+        }
+
+        .card-img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 12px auto;
+            display: block;
+            background: #fff;
+            box-shadow: 0 2px 8px #fff8;
+        }
+
+        .card-body {
+            padding: 10px 18px 18px 18px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .card-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: #2d2d2d;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+
+        .card-like {
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+            color: #5a4326;
+            font-size: 1.3rem;
+        }
+
+        .card-like.liked {
+            color: #e63946;
+            transform: scale(1.2);
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #222;
+            margin-top: 6px;
+        }
+
+        .card-details {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            text-align: left;
+            background: #fffbe6;
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .card:hover .card-details {
+            display: block;
+        }
+
+        /* ===== Estado de Adopción ===== */
+        .adoption-status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            border: 2px solid;
+            transition: all 0.3s ease;
+        }
+
+        .adoption-status.available {
+            background: #d4edda;
+            color: #155724;
+            border-color: #28a745;
+        }
+
+        .adoption-status.adopted {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #dc3545;
+        }
+
+        /* ===== Botón de Adoptar ===== */
+        .adopt-button {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            width: 100%;
+        }
+
+        .adopt-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+        }
+
+        .adopt-button:active {
+            transform: translateY(0);
+        }
+
+        .adopt-button.adopted {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            cursor: not-allowed;
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+        }
+
+        .adopt-button.adopted:hover {
+            transform: none;
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+        }
+
+        /* ===== Sección de Comentarios ===== */
+        .comment-section {
+            margin-top: 15px;
+            background: #fffbe6;
+            border: 2px solid #8b4513;
+            border-radius: 12px;
+            padding: 15px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .comment-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 2px solid #8b4513;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            resize: none;
+            min-height: 38px;
+            max-height: 80px;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .comment-input:focus {
+            border-color: #654321;
+            box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.2);
+        }
+
+        .comment-btn {
+            background: #d2691e;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(210, 105, 30, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .comment-btn:hover {
+            background: #b8651c;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(210, 105, 30, 0.4);
+        }
+
+        .comment-list {
+            max-height: 150px;
+            overflow-y: auto;
+            border-top: 1px solid #8b4513;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .comment-list:empty {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .comment-item {
+            background: rgba(139, 69, 19, 0.1);
+            border-left: 3px solid #8b4513;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #333;
+            line-height: 1.4;
+            transition: background-color 0.2s ease;
+        }
+
+        .comment-item:hover {
+            background: rgba(139, 69, 19, 0.15);
+        }
+
+        .no-comments {
+            text-align: center;
+            color: #8b4513;
+            font-style: italic;
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        /* ===== Mensaje cuando no hay mascotas guardadas ===== */
+        .no-pets-message {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin: 50px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== Patitas animadas ===== */
+        #paw-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .paw-bg {
+            position: absolute;
+            user-select: none;
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-10px) rotate(10deg); opacity: 1; }
+            100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Scrollbar personalizada ===== */
+        .comment-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .comment-list::-webkit-scrollbar-track {
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 3px;
+        }
+
+        .comment-list::-webkit-scrollbar-thumb {
+            background: #8b4513;
+            border-radius: 3px;
+        }
+
+        /* ===== Modal de comentarios ===== */
+        #modal-comentarios {
+            position: fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background: rgba(0,0,0,0.6);
+            display:flex; align-items:center; justify-content:center;
+            z-index: 2000;
+        }
+        #modal-comentarios .modal-content {
+            background:#fffbe6;
+            border:2px solid #8b4513;
+            border-radius:12px;
+            padding:20px;
+            width:400px;
+            max-height:70%;
+            overflow-y:auto;
+            box-shadow:0 4px 20px rgba(0,0,0,0.3);
+            animation: zoomIn 0.3s ease;
+        }
+        #modal-comentarios .close-btn {
+            float:right;
+            font-size:1.5rem;
+            cursor:pointer;
+            color:#8b4513;
+        }
+        #modal-comentarios .close-btn:hover {
+            color:#654321;
+        }
+        @keyframes zoomIn {
+            from {transform:scale(0.7); opacity:0;}
+            to {transform:scale(1); opacity:1;}
+        }
+        #modal-comments .comment-item {
+            background: rgba(139, 69, 19, 0.1);
+            border-left: 3px solid #8b4513;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .header {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .header-title {
+                font-size: 1.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head> 
+<body>
+<a href="login.html" class="Acceder-button">Acceder</a>
+
+<div class="container-main">
+    <aside class="sidebar">
+        <div class="logo-menu">
+            <img src="./img/logoUpon.png" alt="Logo" class="logo">
+            <span class="menu-icon">&#9776;</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="PestañaDonaciones.html">Donaciones</a></li>
+                <li><a href="SobreNosotros.html">Sobre Nosotros</a></li>
+                <li><a href="Asociaciones.html">Asociaciones</a></li>
+                <li><a href="RecursosLegales.html">Recursos Legales</a></li>
+                <li><a href="guardados.html" style="background: #8b4513; border-radius: 8px;">Guardados</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <div class="header-title">
+                <i class='bx bxs-bookmarks'></i>
+                Publicaciones Guardadas
+            </div>
+            <div class="header-subtitle">
+                Aquí encontrarás todas las mascotas que has guardado para ver más tarde
+            </div>
+        </header>
+
+        <div class="background-paws">
+            <div class="cards-grid" id="cardsGrid"></div>
+        </div>
+    </main>
+</div>
+
+<div id="paw-container"></div>
+
+<script>
+// ===== VARIABLES GLOBALES =====
+const cardsGrid = document.getElementById('cardsGrid');
+
+// ===== CONFIGURACIÓN =====
+const cantidadPatitas = 15;
+const tamanoMin = 30;
+const tamanoMax = 70;
+const sidebarWidth = 200; 
+const headerHeight = 90;
+
+let cardCounter = 0;
+let allPets = [];
+let savedPetsIds = [];
+
+// ===== INICIALIZACIÓN =====
+document.addEventListener('DOMContentLoaded', () => {
+    cargarMascotasGuardadas();
+    generarPatitas();
+    setupEventListeners();
+    crearModalComentarios();
+});
+
+// ===== FUNCIONES DE GUARDADOS =====
+function toggleGuardado(cardId) {
+    const savedPets = JSON.parse(localStorage.getItem("savedPets")) || {};
+    savedPets[cardId] = !savedPets[cardId];
+    localStorage.setItem("savedPets", JSON.stringify(savedPets));
+    
+    window.dispatchEvent(new Event('savedPetsUpdated'));
+    
+    return savedPets[cardId];
+}
+
+function isCardSaved(cardId) {
+    const savedPets = JSON.parse(localStorage.getItem("savedPets")) || {};
+    return savedPets[cardId] === true;
+}
+
+function getSavedPetsIds() {
+    const savedPets = JSON.parse(localStorage.getItem("savedPets")) || {};
+    return Object.keys(savedPets).filter(id => savedPets[id] === true);
+}
+
+// ===== FUNCIONES DE ADOPCIÓN =====
+function toggleAdopcion(cardId) {
+    const adoptedPets = JSON.parse(localStorage.getItem("adoptedPets")) || {};
+    adoptedPets[cardId] = !adoptedPets[cardId];
+    localStorage.setItem("adoptedPets", JSON.stringify(adoptedPets));
+    
+    window.dispatchEvent(new Event('adoptedPetsUpdated'));
+    
+    return adoptedPets[cardId];
+}
+
+function isCardAdopted(cardId) {
+    const adoptedPets = JSON.parse(localStorage.getItem("adoptedPets")) || {};
+    return adoptedPets[cardId] === true;
+}
+
+function actualizarEstadosAdopcion() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const cardId = card.id;
+        const adoptBtn = card.querySelector('.adopt-button');
+        const statusBadge = card.querySelector('.adoption-status');
+        
+        if (adoptBtn && statusBadge) {
+            const isAdopted = isCardAdopted(cardId);
+            
+            if (isAdopted) {
+                adoptBtn.classList.add('adopted');
+                adoptBtn.innerHTML = '<i class="bx bx-check-circle"></i> Adoptado';
+                adoptBtn.disabled = true;
+                statusBadge.classList.remove('available');
+                statusBadge.classList.add('adopted');
+                statusBadge.textContent = 'Adoptado';
+            } else {
+                adoptBtn.classList.remove('adopted');
+                adoptBtn.innerHTML = '<i class="bx bxs-heart"></i> Adoptar';
+                adoptBtn.disabled = false;
+                statusBadge.classList.remove('adopted');
+                statusBadge.classList.add('available');
+                statusBadge.textContent = 'En Adopción';
+            }
+        }
+    });
+}
+
+// ===== CONFIGURACIÓN DE EVENT LISTENERS =====
+function setupEventListeners() {
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'pets' || e.key === 'savedPets') {
+            cardsGrid.innerHTML = '';
+            cardCounter = 0; 
+            cargarMascotasGuardadas();
+        }
+        if (e.key === 'adoptedPets') {
+            actualizarEstadosAdopcion();
+        }
+    });
+    
+    window.addEventListener('savedPetsUpdated', function() {
+        cardsGrid.innerHTML = '';
+        cardCounter = 0;
+        cargarMascotasGuardadas();
+    });
+    
+    window.addEventListener('adoptedPetsUpdated', function() {
+        actualizarEstadosAdopcion();
+    });
+}
+
+// ===== FUNCIONES DE CARGA Y VISUALIZACIÓN =====
+async function cargarMascotasGuardadas() {
+    try {
+        const response = await fetch('obtenerGuardadosUsuario.php');
+        const result = await response.json();
+        if (result.success && result.data.length > 0) {
+            allPets = result.data.map(mascota => ({
+                id: mascota.id_masc,
+                name: mascota.nom_masc || "Sin nombre",
+                raza: mascota.raza_masc || "Desconocida",
+                especie: mascota.especie_masc || "Otro",
+                image: mascota.foto_masc ? mascota.foto_masc : "img/default.jpg",
+                edad: mascota.edad_masc || "Desconocida",
+                salud: mascota.salud_masc || "Desconocida",
+                tamano: mascota.tamano_masc || "Desconocida",
+                desc: mascota.desc_masc || "Sin descripción",
+                adoptado: mascota.estadoAdopt_masc || 0
+            }));
+            mostrarMascotasGuardadas();
+        } else {
+            mostrarMensajeVacio();
+        }
+    } catch (error) {
+        console.error("Error al cargar guardados:", error);
+        mostrarMensajeVacio();
+    }
+}
+
+function mostrarMascotasGuardadas() {
+    cardsGrid.innerHTML = '';
+    cardCounter = 0;
+
+    if (allPets.length === 0) {
+        mostrarMensajeVacio();
+    } else {
+        allPets.forEach(pet => {
+            crearCard(pet, pet.id);
+        });
+    }
+}
+function mostrarMensajeVacio() {
+    const mensaje = document.createElement("div");
+    mensaje.className = "no-pets-message";
+    mensaje.innerHTML = `
+        <i class='bx bxs-bookmark-minus' style='font-size: 3rem; color: #b48a5a; display: block; margin-bottom: 10px;'></i>
+        <h3>No tienes publicaciones guardadas</h3>
+        <p>Las mascotas que guardes aparecerán aquí para que puedas verlas más tarde.</p>
+        <a href="index.php" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #b48a5a; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+            <i class='bx bx-home'></i> Ir al inicio
+        </a>
+    `;
+    cardsGrid.appendChild(mensaje);
+}
+
+// ===== FUNCIÓN PARA CREAR CARDS =====
+function crearCard(pet, originalIndex) {
+    const cardId = `card-${originalIndex}`;
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = cardId;
+
+    card.innerHTML = `
+        <div class="card-header">
+            <i class='bx bxs-bookmark card-bookmark' data-id-masc='${pet.id}'></i>
+            <div class="card-actions">
+                <i class='bx bx-message-detail card-comment'></i>
+                <i class='bx bx-heart card-like' data-id-publ='${pet.id}'></i>
+            </div>
+        </div>
+        <img src="${pet.image}" class="card-img" alt="${pet.name}">
+        <div class="card-body">
+            <div class="card-info">
+                <i class='bx bxs-cat'></i> 
+                <div class="card-title">${pet.name}</div>
+                <i class='bx bxs-dog'></i> 
+            </div>
+            <div class="card-desc">${pet.desc}</div>
+            <div class="card-details">
+                <p><b>Raza:</b> ${pet.raza}</p>
+                <p><b>Especie:</b> ${pet.especie}</p>
+                <p><b>Tamaño:</b> ${pet.tamano}</p>
+                <p><b>Salud:</b> ${pet.salud}</p>
+                <p><b>Estado de adopción:</b> 
+                    <span class="adoption-status ${pet.adoptado ? 'adopted' : 'available'}">
+                        ${pet.adoptado ? 'Adoptado' : 'En Adopción'}
+                    </span>
+                </p>
+            </div>
+            <button class="adopt-button ${pet.adoptado ? 'adopted' : ''}" ${pet.adoptado ? 'disabled' : ''}>
+                <i class='bx ${pet.adoptado ? 'bx-check-circle' : 'bxs-heart'}'></i>
+                ${pet.adoptado ? 'Adoptado' : 'Adoptar'}
+            </button>
+            <div class="comment-section" style="display: none;"></div>
+        </div>
+    `;
+
+    // ❤️ LIKE
+    const heartIcon = card.querySelector(".card-like");
+    const idPubl = heartIcon.dataset.idPubl;
+
+    fetch('get_likes.php')
+        .then(res => res.json())
+        .then(likes => {
+            if (likes.includes(idPubl)) {
+                heartIcon.classList.remove('bx-heart');
+                heartIcon.classList.add('bxs-heart', 'liked');
+                heartIcon.style.color = "#e63946";
+            }
+        });
+
+    heartIcon.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        try {
+            const res = await fetch('like.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'id_publ=' + encodeURIComponent(idPubl)
+            });
+            const result = await res.json();
+            if (result.liked) {
+                heartIcon.classList.remove('bx-heart');
+                heartIcon.classList.add('bxs-heart', 'liked');
+                heartIcon.style.color = "#e63946";
+                heartIcon.style.transform = "scale(1.2)";
+                setTimeout(() => heartIcon.style.transform = "scale(1)", 150);
+            } else {
+                heartIcon.classList.remove('bxs-heart', 'liked');
+                heartIcon.classList.add('bx-heart');
+                heartIcon.style.color = "";
+            }
+        } catch (err) {
+            alert("Debes iniciar sesión para dar like.");
+        }
+    });
+
+    // 🔖 GUARDADO
+    const bookmarkIcon = card.querySelector(".card-bookmark");
+    const idMasc = bookmarkIcon.dataset.idMasc;
+
+    fetch('obtenerGuardado.php?id_masc=' + encodeURIComponent(idMasc))
+        .then(res => res.json())
+        .then(data => {
+            if (data.saved) {
+                bookmarkIcon.classList.add("saved");
+            }
+        });
+
+    bookmarkIcon.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        const res = await fetch('guardarGuardado.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_masc: idMasc })
+        });
+        const result = await res.json();
+        if (result.success) {
+            bookmarkIcon.classList.toggle("saved");
+        }
+    });
+
+    cardsGrid.appendChild(card);
+}
+
+
+// ===== FUNCIONES DE COMENTARIOS =====
+function guardarComentario(cardId, texto) {
+    const comentarios = JSON.parse(localStorage.getItem("comentarios")) || {};
+    if (!comentarios[cardId]) comentarios[cardId] = [];
+    comentarios[cardId].push({
+        texto: texto,
+        fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem("comentarios", JSON.stringify(comentarios));
+}
+
+function mostrarComentarios(cardId, container) {
+    container.innerHTML = "";
+    const comentarios = JSON.parse(localStorage.getItem("comentarios")) || {};
+    const lista = comentarios[cardId] || [];
+    
+    if (lista.length === 0) {
+        container.innerHTML = '<div class="no-comments">No hay comentarios aún. ¡Sé el primero en comentar!</div>';
+        return;
+    }
+    
+    lista.forEach(comentario => {
+        const div = document.createElement("div");
+        div.className = "comment-item";
+        
+        if (typeof comentario === 'string') {
+            div.innerHTML = `💬 ${comentario}`;
+        } else {
+            div.innerHTML = `💬 ${comentario.texto}`;
+        }
+        
+        container.appendChild(div);
+    });
+    
+    container.scrollTop = container.scrollHeight;
+}
+
+// ===== FUNCIONES DE MODAL =====
+function crearModalComentarios() {
+    const modal = document.createElement("div");
+    modal.id = "modal-comentarios";
+    modal.style.display = "none";
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div id="modal-comments"></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.querySelector(".close-btn").addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+}
+
+function abrirModalComentarios(cardId, petName) {
+    const modal = document.getElementById("modal-comentarios");
+    const title = modal.querySelector("#modal-title");
+    const commentsDiv = modal.querySelector("#modal-comments");
+
+    title.textContent = "Comentarios de " + petName;
+    commentsDiv.innerHTML = "";
+
+    const comentarios = JSON.parse(localStorage.getItem("comentarios")) || {};
+    const lista = comentarios[cardId] || [];
+
+    if (lista.length === 0) {
+        commentsDiv.innerHTML = '<div class="no-comments">No hay comentarios aún.</div>';
+    } else {
+        lista.forEach(comentario => {
+            const div = document.createElement("div");
+            div.className = "comment-item";
+            
+            if (typeof comentario === 'string') {
+                div.innerHTML = `💬 ${comentario}`;
+            } else {
+                div.innerHTML = `💬 ${comentario.texto}`;
+            }
+            
+            commentsDiv.appendChild(div);
+        });
+    }
+
+    modal.style.display = "flex";
+}
+
+// ===== FUNCIÓN PARA GENERAR PATITAS ANIMADAS =====
+function generarPatitas() {
+    const container = document.getElementById('paw-container');
+    const containerWidth = window.innerWidth - sidebarWidth;
+    const containerHeight = window.innerHeight;
+    const posiciones = [];
+
+    for(let i=0; i<cantidadPatitas; i++) {
+        const paw = document.createElement('img');
+        paw.src = 'img/pawBackground.png';
+        paw.classList.add('paw-bg');
+
+        const tamano = tamanoMin + Math.random() * (tamanoMax - tamanoMin);
+        paw.style.width = `${tamano}px`;
+        paw.style.height = `${tamano}px`;
+
+        let x, y, intentos = 0;
+        do {
+            x = sidebarWidth + Math.random() * (containerWidth - tamano);
+            y = headerHeight + Math.random() * (containerHeight - headerHeight - tamano);
+            intentos++;
+        } while(posiciones.some(p => 
+            Math.abs(p.x - x) < (p.size + tamano) && Math.abs(p.y - y) < (p.size + tamano)
+        ) && intentos < 100);
+
+        posiciones.push({x, y, size: tamano});
+        paw.style.left = `${x}px`;
+        paw.style.top = `${y}px`;
+
+        paw.style.animationDuration = `${2 + Math.random()*3}s`;
+
+        container.appendChild(paw);
+    }
+}
+</script>
+
+</body>
+</html>

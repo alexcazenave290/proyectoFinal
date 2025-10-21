@@ -1,0 +1,321 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #fbe0b6;
+    color: #5a4326;
+    font-family: Arial, sans-serif;
+    height: 100vh; /* asegurar altura completa */
+}
+
+.container-main {
+    display: flex;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    background: #b48a5a;
+    width: 220px;
+    min-width: 180px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+.logo-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 30px 0;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #5a4326;
+    object-fit: cover;
+    padding: 6px; 
+    margin: 0 auto;
+}
+
+.menu-icon {
+    font-size: 2rem;
+    color: #5a4326;
+    cursor: pointer;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin: 18px 0;
+    text-align: left;
+    padding-left: 18px;
+}
+
+.sidebar nav ul li a {
+    color: #fffbe6;
+    font-weight: bold;
+    font-size: 1.15rem;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+}
+
+.sidebar nav ul li a:hover {
+    color: #fff;
+}
+
+.paw-icon {
+    font-size: 1.6rem;
+    margin-left: 12px;
+    color: #fffbe6;
+    display: flex;
+    align-items: center;
+}
+
+.background-paws {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+}
+
+.paw-bg {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    opacity: 0.4;
+    z-index: 2;
+    filter: brightness(0) saturate(100%);
+    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(.4,2,.6,1);
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #5a4326;
+    object-fit: cover;
+    padding: 6px; 
+    margin: 0 auto;
+    display: block;
+}
+.logo-menu {
+    justify-content: center;
+    gap: 0;
+}
+.menu-icon {
+    display: none;
+}
+
+
+.sidebar {
+    background: #b48a5a;
+    width: 220px;
+    min-width: 180px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    height: 100vh;  
+    z-index: 100;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-left: 220px; 
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+    .container-main {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100vw;
+        min-width: unset;
+        height: 70px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        z-index: 100;
+        padding: 0 10px;
+    }
+    .logo-menu {
+        margin: 0 18px 0 0;
+    }
+    .sidebar nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        height: 70px;
+    }
+    .sidebar nav ul li {
+        margin: 0;
+        padding: 0 10px;
+        text-align: center;
+    }
+    .main-content {
+        margin-left: 0;
+        margin-top: 70px;
+        width: 100vw;
+        align-items: center;
+    }
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        justify-items: center;
+        width: 100vw;
+    }
+    .card {
+        width: 95vw;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .card-like.liked {
+        color: #e63946 !important; /* rojo */
+        transition: color 0.2s;
+    }
+    .header {
+        width: 95vw;
+        min-width: 220px;
+    }
+}
+
+/* Responsive extra para móviles muy pequeños */
+@media (max-width: 600px) {
+    .sidebar {
+        height: 56px;
+    }
+    .sidebar nav ul {
+        height: 56px;
+        gap: 1rem;
+    }
+    .main-content {
+        margin-top: 56px;
+    }
+    .header {
+        width: 98vw;
+        min-width: 120px;
+        font-size: 0.95rem;
+    }
+    .card {
+        width: 98vw;
+        max-width: 99vw;
+    }
+}
+
+@media (max-width: 1250px) {
+    .paw-bg {
+        display: none;
+    }
+}
+
+
+
+
+/* --- Responsive --- */
+
+/* Tablets / pantalla mediana */
+@media (max-width: 900px) {
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+    
+    .donaciones-container {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .donaciones-card {
+        padding: 30px 20px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100vw;
+        height: 56px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 10px;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        height: 56px;
+        align-items: center;
+    }
+
+    .logo-menu {
+        margin-right: 10px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 56px;
+        padding: 10px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .donaciones-container {
+        flex-direction: column;
+        align-items: flex-start; /* card pegada al sidebar */
+        padding: 10px;
+        margin-top: 0;
+    }
+
+    .donaciones-card {
+        padding: 20px 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .tooltip .tooltiptext {
+        width: 220px;
+        font-size: 0.75rem;
+    }
+
+    .btn-donar {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
