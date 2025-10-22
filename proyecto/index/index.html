@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Casa Patitas</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <a href="login.html" class="Acceder-button" id="login-btn">Acceder</a>
+
+    <div class="container-main">
+        <aside class="sidebar">
+            <div class="logo-menu">
+                <img src="../img/logoCasaPatitas.png" alt="Logo" class="logo">
+                <span class="menu-icon">&#9776;</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" style="background: #8b4513; border-radius: 8px;">Inicio</a></li>
+                    <li><a href="PestañaDonaciones.html">Donaciones</a></li>
+                    <li><a href="SobreNosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="Asociaciones.html">Asociaciones</a></li>
+                    <li><a href="RecursosLegales.html">Recursos Legales</a></li>
+                    <li><a href="guardados.html">Guardados</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div id="profile-icon" style="display:none; position:absolute; top:7vh; right:15vh; z-index:200;">
+                    <div id="profile-circle"
+                        style="width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 5px #ccc;cursor:pointer;transition:background 0.2s;">
+                        <i class='bx bx-user' style="font-size:2rem;color:#b48a5a;"></i>
+                    </div>
+                    <div id="profile-menu" class="profile-menu">
+                        <ul>
+                            <li id="ver-perfil">Ver Perfil</li>
+                            <li id="editar-perfil">Editar Perfil</li>
+                            <li id="logout">Deslogearse</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="Buscar por nombre o descripción..." class="search-bar"
+                        id="searchBar">
+                    <button class="filters-toggle" id="filtersToggle">
+                        <i class='bx bx-filter-alt'></i>
+                        Filtros Avanzados
+                    </button>
+                </div>
+
+                <div class="filters-container" id="filtersContainer">
+                    <div class="filter-group">
+                        <label class="filter-label">Especie</label>
+                        <select class="filter-select" id="especieFilter">
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Raza</label>
+                        <select class="filter-select" id="razaFilter">
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Tamaño</label>
+                        <select class="filter-select" id="tamanoFilter">
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Estado de Salud</label>
+                        <select class="filter-select" id="saludFilter">
+                        </select>
+                    </div>
+
+                    <button class="clear-filters" id="clearFilters">
+                        <i class='bx bx-x'></i>
+                        Limpiar Filtros
+                    </button>
+                </div>
+
+                <div class="active-filters" id="activeFilters"></div>
+            </header>
+
+            <div class="background-paws">
+                <div class="cards-grid" id="cardsGrid"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="paw-container"></div>
+
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="index.js"></script>
+
+    <div id="perfil-modal" style="display:none;">
+        <div class="perfil-modal-bg"></div>
+        <div class="perfil-modal-card">
+            <span class="close-perfil-modal">&times;</span>
+            <div id="perfil-modal-content"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
