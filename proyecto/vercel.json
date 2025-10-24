@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "/index/index.html",
+            "src": "index.html",
             "use": "@vercel/node"
         }
     ],
@@ -11,6 +11,8 @@
             "src": "/(.*)",
             "dest": "/"
         }
-    ]
-
+    ],
+    "rewrites": [
+          { "source": "/login", "destination": "/login.html" }
+        ]
 }
