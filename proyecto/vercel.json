@@ -11,8 +11,6 @@
             "src": "/(.*)",
             "dest": "/"
         }
-    ],
-    "rewrites": [
-          { "source": "/login", "destination": "/login.html" }
-        ]
+    ]
 }
+
