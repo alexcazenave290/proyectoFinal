@@ -1,10 +1,13 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" }
-  ],
-  "rewrites": [
-    { "source": "/login", "destination": "/login/login.html" },
-    { "source": "/index", "destination": "/index.html" }
-  ]
-}
+      "functions": {
+        "api/*/.php": {
+          "runtime": "vercel-php@0.6.0"
+        }
+      },
+      "routes": [
+        {
+          "src": "/(.*)",
+          "dest": "/api/index.php"
+        }
+      ]
+    }
