@@ -1,0 +1,104 @@
+    :root{
+      --marron:#8b6f47;
+      --marron-dark:#6e5432;
+      --beige:#f4ede4;
+      --beige-card:#fff9f3;
+      --accent:#b29366;
+      --muted:#5a4326;
+    }
+
+    body{
+      background:var(--beige);
+      font-family: 'Poppins', system-ui, Arial;
+      color:#4b3b2b;
+      margin:0;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      position: fixed;
+      left:0; top:0; bottom:0;
+      width:220px;
+      background: linear-gradient(180deg,var(--marron) 0%, #b48a5a 100%);
+      color:white;
+      padding:18px 12px;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.12);
+      transition: transform 0.3s ease;
+      z-index:1000;
+    }
+
+    .sidebar .logo{ width:48px; display:block; margin:0 auto 10px;}
+    .sidebar nav ul{ list-style:none; padding:0; margin:12px 0 0 0;}
+    .sidebar nav a{ color:white; text-decoration:none; display:block; padding:10px 8px; border-radius:8px; margin-bottom:6px; font-weight:600;}
+    .sidebar nav a:hover{ background: rgba(255,255,255,0.08); }
+
+    /* Toggle button */
+    #menu-toggle {
+      display:none;
+      font-size:1.8rem;
+      cursor:pointer;
+      position:fixed;
+      top:12px; left:12px;
+      z-index:1100;
+      color:var(--marron-dark);
+    }
+
+    .main-content{
+      margin-left:240px;
+      padding:28px;
+      min-height:100vh;
+      transition: margin-left 0.3s ease;
+    }
+
+    .card-form{
+      background:var(--beige-card);
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+
+    .section-title{
+      font-weight:700; 
+      font-size:1.3rem; 
+      color:#2d2d2d; 
+      margin-bottom:12px; 
+      border-bottom:2px solid var(--accent); 
+      display:inline-block; 
+      padding-bottom:6px; 
+    }
+
+    label.form-label{
+      font-weight:600;
+    }
+
+    table thead{ background:var(--accent); color:white; }
+    .no-data{ text-align:center; color:#666; padding:28px; background:#fff; border-radius:10px; }
+
+    .btn{
+      font-weight:bold;
+      border-radius:8px;
+      color:white;
+      background: var(--accent);
+    }
+    .btn:hover{ background: #9b7447; }
+
+    /* Animación */
+    #seccion-seguimiento {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+      visibility: hidden;
+    }
+    #seccion-seguimiento.activo {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .sidebar { transform: translateX(-100%); position:fixed; }
+      .sidebar.active { transform: translateX(0); }
+      #menu-toggle { display:block; }
+      .main-content { margin-left:0; padding:20px; }
+    }
