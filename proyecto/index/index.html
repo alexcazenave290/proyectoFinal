@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Patitas</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css?v=3.2.0">
+</head>
+
+<body>
+    <a href="/proyecto/login/login.html" class="Acceder-button" id="login-btn">Acceder</a>
+
+    <i id="menu-toggle" class='bx bx-menu'></i>
+
+    <div class="container-main">
+        <aside class="sidebar">
+            <img src="../img/logoCasaPatitas.png" alt="Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="/proyecto/index/index.html"  style="background: rgba(255,255,255,0.2); border-radius:8px;">Inicio</a></li>
+                    <li><a href="/proyecto/Donaciones/Donaciones.html">Donaciones</a></li>
+                    <li><a href="/proyecto/SobreNosotros/SobreNosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="/proyecto/Asociaciones/Asociaciones.html">Asociaciones</a></li>
+                    <li><a href="/proyecto/RecursosLegales/RecursosLegales.html">Recursos Legales</a></li>
+                    <li><a href="/proyecto/Seguimiento/Seguimiento.html">Seguimiento</a></li>
+                    <li><a href="/proyecto/Guardados/guardados.html">Guardados</a></li>
+                  </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div id="profile-icon" style="display:none; position:fixed; top:20px; right:80px; z-index:1500;">
+                <div id="profile-circle"
+                    style="width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 5px #ccc;cursor:pointer;transition:background 0.2s;position:relative;z-index:2;">
+                    <i class='bx bx-user' style="font-size:2rem;color:#b48a5a;"></i>
+                </div>
+                <div id="profile-menu" class="profile-menu">
+                    <ul>
+                        <li id="ver-perfil">Ver Perfil</li>
+                        <li id="editar-perfil">Editar Perfil</li>
+                        <li id="ver-chats">Chats</li>
+                        <li id="logout">Deslogearse</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <header class="header">
+                <div class="search-container">
+                    <input type="text" placeholder="Buscar por nombre o descripción..." class="search-bar"
+                        id="searchBar">
+                    <button class="filters-toggle" id="filtersToggle">
+                        <i class='bx bx-filter-alt'></i>
+                        Filtros Avanzados
+                    </button>
+                </div>
+
+                <div class="filters-container" id="filtersContainer">
+                    <div class="filter-group">
+                        <label class="filter-label">Especie</label>
+                        <select class="filter-select" id="especieFilter">
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Raza</label>
+                        <select class="filter-select" id="razaFilter">
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Tamaño</label>
+                        <select class="filter-select" id="tamanoFilter">
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Estado de Salud</label>
+                        <select class="filter-select" id="saludFilter">
+                        </select>
+                    </div>
+
+                    <button class="clear-filters" id="clearFilters">
+                        <i class='bx bx-x'></i>
+                        Limpiar Filtros
+                    </button>
+                </div>
+
+                <div class="active-filters" id="activeFilters"></div>
+            </header>
+
+            <div class="background-paws">
+                <div class="cards-grid" id="cardsGrid"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="paw-container"></div>
+
+
+
+    <div id="perfil-modal" style="display:none;">
+        <div class="perfil-modal-bg"></div>
+        <div class="perfil-modal-card">
+            <span class="close-perfil-modal">&times;</span>
+            <div id="perfil-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Modal de Perfil del Creador -->
+    <div id="creator-profile-modal" style="display:none;">
+        <div class="creator-modal-bg"></div>
+        <div class="creator-modal-card">
+            <span class="close-creator-modal">&times;</span>
+            <div id="creator-profile-content"></div>
+        </div>
+    </div>
+
+    <!-- Modal de Lista de Chats -->
+    <div id="chats-list-modal" style="display:none;">
+        <div class="chats-list-modal-bg"></div>
+        <div class="chats-list-modal-card">
+            <span class="close-chats-list-modal">&times;</span>
+            <h2 style="text-align:center;color:#8b4513;margin-bottom:20px;">Mis Conversaciones</h2>
+            <div id="chats-list-content">
+                <!-- Las conversaciones se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Chat -->
+    <div id="chat-modal" style="display:none;">
+        <div class="chat-modal-bg"></div>
+        <div class="chat-modal-content">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="chat-user-avatar" id="chat-user-avatar">
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="chat-user-info">
+                        <h3 id="chat-user-name">Usuario</h3>
+                        <p id="chat-user-type">Usuario</p>
+                    </div>
+                </div>
+                <span class="close-chat-modal"><i class='bx bx-x'></i></span>
+            </div>
+            <div class="chat-window" id="chat-window">
+                <!-- Mensajes se cargarán aquí -->
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-message-input" class="chat-message-input" placeholder="Escribe tu mensaje...">
+                <button id="chat-send-button" class="chat-send-button">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="index.js?v=3.3.0"></script>
+
+</body>
+
+</html>

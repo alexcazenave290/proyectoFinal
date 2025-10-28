@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donaciones - Casa Patitas</title>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Donaciones.css?v=1.0.1">
+</head>
+<body>
+
+
+<i id="menu-toggle" class='bx bx-menu'></i>
+
+
+<aside class="sidebar">
+  <img src="../img/logoCasaPatitas.png" alt="Logo" class="logo">
+  <nav>
+    <ul>
+      <li><a href="/proyecto/index/index.html">Inicio</a></li>
+      <li><a href="/proyecto/Donaciones/Donaciones.html" style="background: rgba(255,255,255,0.2); border-radius:8px;">Donaciones</a></li>
+      <li><a href="/proyecto/SobreNosotros/SobreNosotros.html">Sobre Nosotros</a></li>
+      <li><a href="/proyecto/Asociaciones/Asociaciones.html">Asociaciones</a></li>
+      <li><a href="/proyecto/RecursosLegales/RecursosLegales.html">Recursos Legales</a></li>
+      <li><a href="/proyecto/Seguimiento/Seguimiento.html">Seguimiento</a></li>
+      <li><a href="/proyecto/Guardados/guardados.html">Guardados</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<div class="main-content">
+  <div class="donaciones-card">
+    <h1>Donaciones</h1>
+    <p>Selecciona las opciones que deseas apoyar:</p>
+
+    <label><input type="checkbox" id="general"> Donación al proyecto en general</label>
+    <label><input type="checkbox" id="refugio"> Donación a un refugio en específico</label>
+
+    <div class="tooltip">
+      <input type="text" id="input" placeholder="Refugio" disabled>
+      <span class="tooltiptext">Debes elegir "Donación a un refugio en específico" para escribir aquí</span>
+    </div>
+
+    <p>Elige la plataforma de pago:</p>
+    <button class="btn-pago btn-mercadopago" id="mercadoBtn">Pagar con Mercado Pago</button>
+    <button class="btn-pago btn-paypal" id="paypalBtn">Pagar con PayPal</button>
+  </div>
+</div>
+
+<script src="Donaciones.js?v=2.0.0"></script>
+</body>
+</html>
