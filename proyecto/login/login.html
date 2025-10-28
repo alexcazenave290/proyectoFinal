@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Casa Patitas – Acceso</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="login.css?v=1.0.3"/>
+</head>
+<body>
+  <!-- Patitas animadas -->
+  <div class="background-paws" id="background-paws"></div>
+
+  <!-- ============ LOGIN (vista 1) ============ -->
+  <section id="signin" class="login-box">
+    <h2 class="mb-3">🐾 Iniciar Sesión</h2>
+
+    <!-- Switch de tipo de login -->
+    <div class="mode-switch-login">
+      <button type="button" class="pill-login active" data-login-type="usuario"><i class="bi bi-person"></i> Usuario</button>
+      <button type="button" class="pill-login" data-login-type="empleado"><i class="bi bi-briefcase"></i> Empleado</button>
+      <button type="button" class="pill-login" data-login-type="institucion"><i class="bi bi-building"></i> Institución</button>
+    </div>
+
+    <form id="login-form" autocomplete="off">
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="login-gmail" placeholder="Email" required/>
+        <label for="login-gmail">Email</label>
+      </div>
+      <div class="form-floating mb-4">
+        <input type="password" class="form-control" id="login-password" placeholder="Contraseña" required/>
+        <label for="login-password">Contraseña</label>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+    </form>
+
+    <p class="toggle-text mt-3">
+      <span id="toggle-to-register">¿No tienes cuenta? Regístrate aquí</span>
+    </p>
+  </section>
+
+  <!-- ============ REGISTRO (vista 2) ============ -->
+  <section id="register-stage" class="register-stage" hidden>
+    <!-- Switch superior (fuera de las 3 cards) -->
+    <div class="mode-switch">
+      <button class="pill active" data-mode="usuario"><i class="bi bi-person"></i> Usuario</button>
+      <button class="pill" data-mode="empleado"><i class="bi bi-briefcase"></i> Empleado</button>
+      <button class="pill" data-mode="institucion"><i class="bi bi-building"></i> Institución</button>
+    </div>
+
+    <!-- 3 columnas: izq / centro / der -->
+    <div class="tri-forms">
+      <!-- USUARIO (izquierda) -->
+      <form id="form-usuario" class="card-reg left two-col" autocomplete="off">
+        <h5 class="card-title mb-3">👤 Usuario</h5>
+        <div class="grid">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email_usuario" placeholder="Email" required>
+            <label for="email_usuario">Email</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="usuario_usuario" placeholder="Usuario" required>
+            <label for="usuario_usuario">Usuario</label>
+          </div>
+          <div class="form-floating wide">
+            <input type="password" class="form-control" id="password_usuario" placeholder="Contraseña" required>
+            <label for="password_usuario">Contraseña</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success w-100 mt-3">Registrarse como Usuario</button>
+      </form>
+
+      <!-- EMPLEADO (centro) -->
+      <form id="form-empleado" class="card-reg center two-col" autocomplete="off" hidden>
+        <h5 class="card-title mb-3">🧑‍⚕️ Empleado</h5>
+        <div class="grid">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email_empleado" placeholder="Email" required>
+            <label for="email_empleado">Email</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="usuario_empleado" placeholder="Usuario" required>
+            <label for="usuario_empleado">Usuario</label>
+          </div>
+
+          <div class="form-floating wide">
+            <input type="password" class="form-control" id="password_empleado" placeholder="Contraseña" required>
+            <label for="password_empleado">Contraseña</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" class="form-control" id="nombre_empleado" placeholder="Nombre" required>
+            <label for="nombre_empleado">Nombre</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="apellido_empleado" placeholder="Apellido" required>
+            <label for="apellido_empleado">Apellido</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" class="form-control" id="cedula_empleado" placeholder="Cédula" required>
+            <label for="cedula_empleado">Cédula</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="telefono_empleado" placeholder="Teléfono" required>
+            <label for="telefono_empleado">Teléfono</label>
+          </div>
+
+          <div class="form-floating wide">
+            <input type="text" class="form-control" id="direccion_empleado" placeholder="Dirección" required>
+            <label for="direccion_empleado">Dirección</label>
+          </div>
+
+          <div class="form-floating">
+            <select class="form-control" id="tipo_empleado" required>
+              <option value="">Tipo de Empleado</option>
+              <option value="veterinario">Veterinario</option>
+              <option value="refugio">Miembro de Refugio</option>
+            </select>
+            <label for="tipo_empleado">Tipo de Empleado</label>
+          </div>
+
+          <div class="form-floating">
+            <select class="form-control" id="institucion_empleado" required>
+              <option value="">Selecciona una institución</option>
+            </select>
+            <label for="institucion_empleado">Institución</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success w-100 mt-3">Registrarse como Empleado</button>
+      </form>
+
+      <!-- INSTITUCIÓN (derecha) -->
+      <form id="form-institucion" class="card-reg right two-col" autocomplete="off" hidden>
+        <h5 class="card-title mb-3">🏛️ Institución</h5>
+        <div class="grid">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="nomb_inst" placeholder="Nombre de Institución" required>
+            <label for="nomb_inst">Nombre de la Institución</label>
+          </div>
+          <div class="form-floating">
+            <input type="email" class="form-control" id="email_institucion" placeholder="Email" required>
+            <label for="email_institucion">Email</label>
+          </div>
+
+          <div class="form-floating wide">
+            <input type="password" class="form-control" id="password_institucion" placeholder="Contraseña" required>
+            <label for="password_institucion">Contraseña</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" class="form-control" id="tel_inst" placeholder="Teléfono" required>
+            <label for="tel_inst">Teléfono</label>
+          </div>
+
+          <div class="form-floating wide">
+            <input type="text" class="form-control" id="direccion_inst" placeholder="Dirección" required>
+            <label for="direccion_inst">Dirección</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" class="form-control" id="dia_inst" placeholder="Ej: Lunes a Viernes" required>
+            <label for="dia_inst">Días de atención</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="time" class="form-control" id="hora_apertura" required>
+            <label for="hora_apertura">Horario Apertura</label>
+          </div>
+          <div class="form-floating">
+            <input type="time" class="form-control" id="hora_cierre" required>
+            <label for="hora_cierre">Horario Cierre</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success w-100 mt-3">Registrar Institución</button>
+        <p class="text-muted mt-2 mb-0" style="font-size: 12px;">Después de crear la institución, los empleados pueden registrarse seleccionándola.</p>
+      </form>
+    </div>
+
+    <p class="toggle-text mt-3">
+      <span id="toggle-to-login">← Volver a Iniciar Sesión</span>
+    </p>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="login.js?v=1.2.7"></script>
+</body>
+</html>
