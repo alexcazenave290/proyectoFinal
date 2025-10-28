@@ -1,0 +1,183 @@
+  :root{
+    --marron:#8b6f47;
+    --beige:#f4ede4;
+    --beige-card:#fff9f3;
+    --accent:#b29366;
+    --muted:#5a4326;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', system-ui, Arial;
+    background: var(--beige);
+    color: #4b3b2b;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    left:0; top:0; bottom:0;
+    width:220px;
+    background: linear-gradient(180deg,var(--marron) 0%, #b48a5a 100%);
+    color:white;
+    padding:18px 12px;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .sidebar .logo { width:48px; display:block; margin:0 auto 10px; }
+  .sidebar nav ul { list-style:none; padding:0; margin:12px 0 0 0; }
+  .sidebar nav a {
+    color:white; text-decoration:none; display:block; padding:10px 8px;
+    border-radius:8px; margin-bottom:6px; font-weight:600;
+  }
+  .sidebar nav a:hover { background: rgba(255,255,255,0.08); }
+
+  /* Toggle button */
+  #menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    position: fixed;
+    top: 12px; 
+    left: 12px;
+    z-index: 1100;
+    color: var(--marron-dark);
+    background: transparent;
+    border: none;
+    padding: 5px;
+  }
+
+  /* Main content */
+  .main-content {
+    margin-left:220px;
+    padding:28px;
+    transition: margin-left 0.3s ease;
+  }
+
+  /* Donaciones Card */
+  .donaciones-card {
+    background: var(--beige-card);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  h1 { text-align:center; margin-bottom:15px; }
+  p { text-align:center; margin-bottom:15px; }
+
+  input[type="text"], input[type="email"] {
+    width:100%; padding:10px; margin-top:8px; border:1px solid #ccc; border-radius:5px;
+  }
+
+  label { display:block; margin:10px 0; cursor:pointer; }
+
+  .btn-pago {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 15px auto;
+    padding: 12px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align:center;
+    text-decoration:none;
+    transition: background 0.3s ease;
+  }
+
+  .btn-mercadopago { background: #009EE3; }
+  .btn-mercadopago:hover { background: #007bbd; }
+
+  .btn-paypal { background: #003087; }
+  .btn-paypal:hover { background: #001f50; }
+
+  /* Tooltip */
+  .tooltip { position: relative; display: inline-block; width: 100%; }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align:center;
+    border-radius:6px;
+    padding:6px;
+    position:absolute;
+    z-index:10;
+    bottom:125%;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    transition: opacity 0.3s;
+    font-size:0.85rem;
+  }
+  .tooltip .tooltiptext::after {
+    content:"";
+    position:absolute;
+    top:100%;
+    left:50%;
+    margin-left:-5px;
+    border-width:5px;
+    border-style:solid;
+    border-color:#333 transparent transparent transparent;
+  }
+  .tooltip input:disabled:hover + .tooltiptext {
+    visibility: visible; opacity:1;
+  }
+
+  /* Responsive */
+  @media(max-width:768px){
+    .sidebar { 
+      transform: translateX(-100%); 
+      position:fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+      width: 220px;
+    }
+    .sidebar.active { 
+      transform: translateX(0);
+      box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    }
+    
+    #menu-toggle { 
+      display: flex !important;
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 1100;
+      background: rgba(255, 255, 255, 0.9);
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      color: var(--marron-dark);
+      font-size: 1.8rem;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+    }
+
+    #menu-toggle:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.05);
+    }
+    
+    .main-content { 
+      margin-left:0; 
+      padding: 70px 20px 20px 20px; 
+    }
+  }

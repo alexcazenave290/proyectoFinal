@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Seguimientos — Casa Patitas</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="VerSeguimiento.css?v=1.0">
+</head>
+
+<body>
+    <a href="/proyecto/login/login.html" class="Acceder-button" id="login-btn">Acceder</a>
+
+    <i id="menu-toggle" class='bx bx-menu'></i>
+
+    <div class="container-main">
+        <aside class="sidebar">
+            <img src="../img/logoCasaPatitas.png" alt="Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="/proyecto/index/index.html">Inicio</a></li>
+                    <li><a href="/proyecto/Donaciones/Donaciones.html">Donaciones</a></li>
+                    <li><a href="/proyecto/SobreNosotros/SobreNosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="/proyecto/Asociaciones/Asociaciones.html">Asociaciones</a></li>
+                    <li><a href="/proyecto/RecursosLegales/RecursosLegales.html">Recursos Legales</a></li>
+                    <li><a href="/proyecto/Seguimiento/Seguimiento.html">Seguimiento</a></li>
+                    <li><a href="/proyecto/VerSeguimiento/VerSeguimiento.html" style="background: rgba(255,255,255,0.2); border-radius:8px;">Ver Seguimiento</a></li>
+                    <li><a href="/proyecto/Guardados/guardados.html">Guardados</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1 class="page-title">
+                    <i class='bx bx-heart'></i>
+                    Seguimientos de Adopciones
+                </h1>
+                <p class="page-subtitle">Conoce cómo les va a las mascotas en sus nuevos hogares</p>
+            </header>
+
+            <section class="seguimientos-grid" id="seguimientosGrid">
+                <!-- Las cards se cargarán dinámicamente aquí -->
+            </section>
+
+            <div id="no-seguimientos" class="no-data" style="display:none;">
+                <i class='bx bx-info-circle'></i>
+                <p>No hay seguimientos publicados aún</p>
+            </div>
+
+            <div id="loading" class="loading">
+                <i class='bx bx-loader-alt bx-spin'></i>
+                <p>Cargando seguimientos...</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="VerSeguimiento.js?v=1.0"></script>
+</body>
+
+</html>
+
